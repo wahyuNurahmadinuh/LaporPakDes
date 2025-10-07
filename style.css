@@ -47,3 +47,36 @@ button:hover {
   text-align: center;
   margin-top: 20px;
 }
+
+#laporanContainer {
+  max-width: 800px;
+  margin: 30px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 15px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.card p {
+  margin: 5px 0;
+}
+
+.card .nama {
+  font-weight: bold;
+  color: #2b2b2b;
+}
+
+.card .lokasi {
+  color: #555;
+}
+
+.card .tanggal {
+  font-size: 12px;
+  color: #888;
+}

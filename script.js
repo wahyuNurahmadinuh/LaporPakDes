@@ -1,5 +1,12 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+import { 
+  getFirestore, 
+  collection, 
+  addDoc, 
+  onSnapshot,
+  query,
+  orderBy
+} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAZmkKMbsS2eeQhlABO_pch9HrkGVujGnk",
@@ -32,7 +39,6 @@ document.getElementById("laporForm").addEventListener("submit", async (event) =>
     document.getElementById("output").innerHTML = `
       <p style="color:green;">Laporan berhasil dikirim!</p>
     `;
-
     document.getElementById("laporForm").reset();
   } catch (error) {
     console.error("Gagal mengirim laporan: ", error);
@@ -40,4 +46,27 @@ document.getElementById("laporForm").addEventListener("submit", async (event) =>
       <p style="color:red;">Terjadi kesalahan saat mengirim laporan.</p>
     `;
   }
+});
+
+const laporanContainer = document.getElementById("laporanContainer");
+
+const q = query(collection(db, "laporan"), orderBy("tanggal", "desc"));
+
+onSnapshot(q, (snapshot) => {
+  laporanContainer.innerHTML = "";
+  snapshot.forEach((doc) => {
+    const data = doc.data();
+
+    const card = document.createElement("div");
+    card.classList.add("card");
+
+    card.innerHTML = `
+      <p class="nama">Oleh\t: ${data.nama}</p>
+      <p class="lokasi">Di : ${data.lokasi}</p>
+      <p>${data.isi}</p>
+      <p class="tanggal">Tanggal\t: ${data.tanggal}</p>
+    `;
+
+    laporanContainer.appendChild(card);
+  });
 });
