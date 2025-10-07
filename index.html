@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lapor Desa Online</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Lapor Desa Online</h1>
+  <form id="laporForm">
+    <label for="nama">Nama Pelapor:</label>
+    <input type="text" id="nama" required>
+
+    <label for="lokasi">Lokasi Kejadian:</label>
+    <input type="text" id="lokasi" required>
+
+    <label for="isi">Isi Laporan:</label>
+    <textarea id="isi" rows="5" required></textarea>
+
+    <button type="submit">Kirim Laporan</button>
+  </form>
+
+  <div id="output"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
