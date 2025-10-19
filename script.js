@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js'
-import { firebaseConfig } from './config.js';
+import { firebaseConfig } from './config.js'
 import {
   getFirestore,
   collection,
@@ -7,7 +7,6 @@ import {
   onSnapshot,
   query,
   orderBy,
-  serverTimestamp
 } from 'https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js'
 
 const app = initializeApp(firebaseConfig)
@@ -53,10 +52,10 @@ function convertToWebPBase64 (file) {
         resolve(webpBase64)
       }
 
-      img.onerror = () => reject('Gagal memproses gambar.')
+      img.onerror = () => reject(new Error('Gagal memproses gambar.'))
     }
 
-    reader.onerror = () => reject('Gagal membaca file gambar.')
+    reader.onerror = () => reject(new Error('Gagal membaca file gambar.'))
   })
 }
 
@@ -115,10 +114,6 @@ onSnapshot(q, (snapshot) => {
     const data = doc.data()
     const card = document.createElement('div')
     card.classList.add('card')
-
-    const waktu = data.tanggal?.toDate
-      ? data.tanggal.toDate().toLocaleString('id-ID')
-      : 'Waktu tidak tersedia'
 
     const imgElement = data.gambar
       ? `<img src="${data.gambar}" alt="Gambar laporan" class="thumbnail">`
