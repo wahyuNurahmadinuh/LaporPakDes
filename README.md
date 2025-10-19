@@ -24,7 +24,7 @@ Pengguna cukup mengisi:
 Semua laporan langsung muncul di halaman tanpa perlu reload, berkat integrasi **Firebase Firestore**.  
 
  **Desain Responsif & Modern**  
-Tampilan menyesuaikan dengan layar perangkat — baik desktop, tablet, maupun smartphone.  
+Tampilan menyesuaikan dengan layar perangkat — baik desktop, tablet, maupun mobile phone.  
 
  **Fitur Preview Gambar (Modal View)**  
 Klik gambar laporan untuk melihatnya dalam ukuran penuh.
