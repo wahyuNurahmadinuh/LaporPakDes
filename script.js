@@ -6,7 +6,7 @@ import {
   addDoc,
   onSnapshot,
   query,
-  orderBy,
+  orderBy
 } from 'https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js'
 
 const app = initializeApp(firebaseConfig)
