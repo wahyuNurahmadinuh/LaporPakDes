@@ -69,7 +69,7 @@ function convertToWebPBase64(file) {
   });
 }
 
-document.getElementById("laporForm").addEventListener("submit", async (event) => {
+document.getElementById("lapor-form").addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const nama = document.getElementById("nama").value;
@@ -90,7 +90,7 @@ document.getElementById("laporForm").addEventListener("submit", async (event) =>
 
     document.getElementById("output").innerHTML = `
       <p style="color:green;">Laporan berhasil dikirim!</p>`;
-    document.getElementById("laporForm").reset();
+    document.getElementById("lapor-form").reset();
   } catch (error) {
     console.error("Gagal mengirim laporan: ", error);
     document.getElementById("output").innerHTML = `
@@ -99,7 +99,7 @@ document.getElementById("laporForm").addEventListener("submit", async (event) =>
   }
 });
 
-const laporanContainer = document.getElementById("laporanContainer");
+const laporanContainer = document.getElementById("laporan-container");
 const q = query(collection(db, "laporan"), orderBy("tanggal", "asc"));
 
 const modal = document.createElement("div");
