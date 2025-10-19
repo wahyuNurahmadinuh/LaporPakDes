@@ -5,7 +5,8 @@ import {
   addDoc, 
   onSnapshot,
   query,
-  orderBy
+  orderBy,
+  serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -30,28 +31,35 @@ function convertToWebPBase64(file) {
 
     const reader = new FileReader();
     reader.readAsDataURL(file);
+    
     reader.onload = (e) => {
       const img = new Image();
       img.src = e.target.result;
 
       img.onload = () => {
         const canvas = document.createElement("canvas");
-        const maxWidth = 600; // batasi ukuran agar file kecil
-        const scale = Math.min(maxWidth / img.width, 1);
+        
+        const maxSize = 800;
+        let width = img.width;
+        let height = img.height;
+        
+        if (width > height && width > maxSize) {
+          height = (height * maxSize) / width;
+          width = maxSize;
+        } else if (height > maxSize) {
+          width = (width * maxSize) / height;
+          height = maxSize;
+        }
 
-        canvas.width = img.width * scale;
-        canvas.height = img.height * scale;
+        canvas.width = width;
+        canvas.height = height;
 
         const ctx = canvas.getContext("2d");
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, width, height);
 
-        const webpBase64 = canvas.toDataURL("image/webp", 0.6);
-
-        const compressed = btoa(
-          unescape(encodeURIComponent(webpBase64)).slice(0, 30000)
-        );
-
-        resolve(compressed);
+        const webpBase64 = canvas.toDataURL("image/webp", 0.7);
+        
+        resolve(webpBase64);
       };
 
       img.onerror = () => reject("Gagal memproses gambar.");
@@ -92,7 +100,23 @@ document.getElementById("laporForm").addEventListener("submit", async (event) =>
 });
 
 const laporanContainer = document.getElementById("laporanContainer");
-const q = query(collection(db, "laporan"), orderBy("tanggal", "desc"));
+const q = query(collection(db, "laporan"), orderBy("tanggal", "asc"));
+
+const modal = document.createElement("div");
+modal.classList.add("modal");
+modal.innerHTML = `
+  <span class="modal-close">&times;</span>
+  <img src="" alt="Fullscreen">
+`;
+document.body.appendChild(modal);
+
+const modalImg = modal.querySelector("img");
+const closeBtn = modal.querySelector(".modal-close");
+
+closeBtn.onclick = () => modal.classList.remove("active");
+modal.onclick = (e) => {
+  if (e.target === modal) modal.classList.remove("active");
+};
 
 onSnapshot(q, (snapshot) => {
   laporanContainer.innerHTML = "";
@@ -101,12 +125,29 @@ onSnapshot(q, (snapshot) => {
     const card = document.createElement("div");
     card.classList.add("card");
 
+    const waktu = data.tanggal?.toDate
+      ? data.tanggal.toDate().toLocaleString("id-ID")
+      : "Waktu tidak tersedia";
+
+    const imgElement = data.gambar
+      ? `<img src="${data.gambar}" alt="Gambar laporan" class="thumbnail">`
+      : "";
+
     card.innerHTML = `
-      <p class="nama">Oleh\t: ${data.nama}</p>
-      <p class="lokasi">Di : ${data.lokasi}</p>
+      <p class="nama"><strong>Oleh:</strong> ${data.nama}</p>
+      <p class="lokasi"><strong>Lokasi:</strong> ${data.lokasi}</p>
       <p>${data.isi}</p>
-      <p class="tanggal">Tanggal\t: ${data.tanggal}</p>
+      ${imgElement}
+      <p class="tanggal"><strong>Tanggal:</strong> ${data.tanggal}</p>
     `;
+
+    if (data.gambar) {
+      const img = card.querySelector(".thumbnail");
+      img.addEventListener("click", () => {
+        modalImg.src = data.gambar;
+        modal.classList.add("active");
+      });
+    }
 
     laporanContainer.appendChild(card);
   });
