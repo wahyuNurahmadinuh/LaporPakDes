@@ -7,27 +7,39 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Lapor Desa Online</h1>
-  <form id="lapor-form">
-    <label for="nama">Nama Pelapor:</label>
-    <input type="text" id="nama" required>
+  <div class="container">
+    <h1> Lapor Desa Online</h1>
+    <p class="subtitle">Sampaikan aspirasi Anda untuk kemajuan desa kita bersama</p>
+    
+    <form id="lapor-form">
+      <div class="form-group">
+        <label for="nama">Nama Pelapor:</label>
+        <input type="text" id="nama" required placeholder="Masukkan nama lengkap Anda">
+      </div>
 
-    <label for="gambar">Upload Gambar Kejadian (opsional):</label>
-    <input type="file" id="gambar" accept="image/*">
+      <div class="form-group">
+        <label for="gambar">Upload Gambar Kejadian (opsional):</label>
+        <input type="file" id="gambar" accept="image/*">
+      </div>
 
-    <label for="lokasi">Lokasi Kejadian:</label>
-    <input type="text" id="lokasi" required>
+      <div class="form-group">
+        <label for="lokasi">Lokasi Kejadian:</label>
+        <input type="text" id="lokasi" required placeholder="Contoh: Jl. Merdeka No. 45">
+      </div>
 
-    <label for="isi">Isi Laporan:</label>
-    <textarea id="isi" rows="5" required></textarea>
+      <div class="form-group">
+        <label for="isi">Isi Laporan:</label>
+        <textarea id="isi" rows="5" required placeholder="Jelaskan detail kejadian yang ingin dilaporkan..."></textarea>
+      </div>
 
-    <button type="submit">Kirim Laporan</button>
-  </form>
+      <button type="submit"> Kirim Laporan</button>
+    </form>
 
-  <div id="output"></div>
+    <div id="output"></div>
 
-  <h2 style="text-align:center; margin-top:40px;">Daftar Laporan Masuk</h2>
-  <div id="laporan-container"></div>
+    <h2> Daftar Laporan Masuk</h2>
+    <div id="laporan-container"></div>
+  </div>
 
   <script type="module" src="script.js"></script>
 </body>
