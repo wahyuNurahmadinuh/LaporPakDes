@@ -20,15 +20,6 @@ Pengguna cukup mengisi:
 - Isi laporan  
 - (Opsional) Upload gambar kejadian  
 
- **Tampilan Daftar Laporan Real-time**  
-Semua laporan langsung muncul di halaman tanpa perlu reload, berkat integrasi **Firebase Firestore**.  
-
- **Desain Responsif & Modern**  
-Tampilan menyesuaikan dengan layar perangkat — baik desktop, tablet, maupun mobile phone.  
-
- **Fitur Preview Gambar (Modal View)**  
-Klik gambar laporan untuk melihatnya dalam ukuran penuh.
-
 ---
 
 ## Teknologi yang Digunakan
@@ -38,7 +29,6 @@ Klik gambar laporan untuk melihatnya dalam ukuran penuh.
 | **HTML5** | Struktur halaman |
 | **CSS3** | Desain antarmuka yang bersih dan responsif |
 | **JavaScript (ES6)** | Logika utama dan interaksi pengguna |
-| **Firebase Firestore** | Penyimpanan data laporan secara real-time |
-| **Firebase Hosting (opsional)** | Untuk deployment cepat dan gratis |
+| **MySQL** | Penyimpanan data laporan secara lokal |
 
 ---
