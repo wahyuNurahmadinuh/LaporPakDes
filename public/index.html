@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lapor Desa Online</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Lapor Desa Online</h1>
+    <p class="subtitle">Sampaikan aspirasi Anda untuk kemajuan desa kita bersama</p>
+    
+    <form id="lapor-form">
+      <div class="form-group">
+        <label for="nama">Nama Pelapor:</label>
+        <input type="text" id="nama" required placeholder="Masukkan nama lengkap Anda">
+      </div>
+      <div class="form-group">
+        <label for="gambar">Upload Gambar Kejadian (opsional):</label>
+        <input type="file" id="gambar" accept="image/*">
+      </div>
+      <div class="form-group">
+        <label for="lokasi">Lokasi Kejadian:</label>
+        <input type="text" id="lokasi" required placeholder="Contoh: Jl. Merdeka No. 45">
+      </div>
+      <div class="form-group">
+        <label for="isi">Isi Laporan:</label>
+        <textarea id="isi" rows="5" required placeholder="Jelaskan detail kejadian yang ingin dilaporkan..."></textarea>
+      </div>
+      <button type="submit">Kirim Laporan</button>
+    </form>
+    <div id="output"></div>
+    <h2>Daftar Laporan Masuk</h2>
+    <div id="laporan-container"></div>
+  </div>
+
+  <!-- Modal untuk gambar fullscreen -->
+  <div id="modal" class="modal">
+    <span class="modal-close">&times;</span>
+    <img id="modal-img" src="" alt="Fullscreen">
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
