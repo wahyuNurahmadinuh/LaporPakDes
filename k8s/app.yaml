@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lapor-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: lapor-app
+  template:
+    metadata:
+      labels:
+        app: lapor-app
+    spec:
+      containers:
+      - name: lapor-app
+        image: lapor-app:1.0
+        ports:
+        - containerPort: 3000
+        env:
+        - name: DB_HOST
+          value: mysql
+        - name: DB_USER
+          value: laporuser
+        - name: DB_PASSWORD
+          value: laporpass
+        - name: DB_NAME
+          value: laporpakdes
+        resources:
+          requests:
+            cpu: "100m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lapor-app
+spec:
+  type: NodePort
+  selector:
+    app: lapor-app
+  ports:
+  - port: 3000
+    targetPort: 3000
+    nodePort: 30080
