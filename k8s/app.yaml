@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: lapor-app
-        image: wahyunurahmadinuh/lapor-app:latest
+        image: wahyunurahmadinuh/lapor-app:1.1
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
